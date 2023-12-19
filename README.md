@@ -41,11 +41,15 @@ This part performs actual search of user query image by (1) extracting features 
 
 ### Results (Top 5 of each method)
 **color** <br>
-`run python3 search.py --query ../query_images/exemple.jpg --c color`
+`run python3 search.py --query ../query_images/01.jpg --c color`
 **gabor** <br>
-`run python3 search.py --query ../query_images/exemple.jpg --c gabor`
+`run python3 search.py --query ../query_images/18.jpg --c gabor`
 **hog** <br>
-`run python3 search.py --query ../query_images/tajmahal.jpg --c hog`
+`run python3 search.py --query ../query_images/20.jpg --c hog`
+
+### ui
+`run python3 ui.py`
+
 
 
 

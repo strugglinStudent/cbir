@@ -88,22 +88,21 @@ class ImageSearchApp:
                 results = searcher._gsearch(features)
 
            
-            myWindow = cv2.resize(query,(60,60))
+            myWindow = cv2.resize(query,(160,160))
             cv2.imshow("query",myWindow)
 
             for (score,resultId) in results:
                 print(score)
                 result = cv2.imread("../" +  "database" +"/"+resultId)
                 print(resultId)
-                myWindow = cv2.resize(result,(80,80))
+                myWindow = cv2.resize(result,(480,480))
                 cv2.imshow("Result: "+str(score),myWindow)
                 ch = cv2.waitKey(0)
                 if ch == ord('q'):
                     pass
 
 
-            # Note: You may need to modify the code in the script after "if args["class"] == ..." to
-            # handle the UI interaction and display results in the UI.
+
 
 def main():
     root = tk.Tk()
