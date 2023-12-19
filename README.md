@@ -13,19 +13,14 @@ Feature extraction is a means of extracting compact but semantically valuable in
 In this retrieval system, i implemented several image features descriptors:
 
 * `color-based`
-  - [HSV histogram](https://github.com/vamc-stash/image-retrieval/blob/master/src/color/color.py) </br>
-    To extract the color features from the content of an image, a proper color space(HSV in this case) and an effective color       descriptor are determined through color histogram(Local color histogram).
+    To extract the color features from the content of an image, a proper color space(HSV in this case) and an effective color  descriptor are determined through color histogram(Local color histogram). </br>
 * `texture-based` 
-  - [Gabor filter](https://github.com/vamc-stash/image-retrieval/blob/master/src/gabor/gabor.py) </br>
+  
   Texture can be thought of as repeated patterns of pixels over a spatial domain. Texture properties are the visual patterns     in an image that have properties of homogeneity that do not result from the presence of only a single color or intensity.
-  Frequency and orientation representations of the `Gabor filter` are similar to those of the human visual system. The images     are filtered using the real parts of various different Gabor filter kernels. The mean and variance of the filtered images are   then used as features for classification, which is based on the least squared error.
+  Frequency and orientation representations of the `Gabor filter` are similar to those of the human visual system. The images     are filtered using the real parts of various different Gabor filter kernels. The mean and variance of the filtered images are   then used as features for classification, which is based on the least squared error.</br>
 * `shape-based` 
-   - [Histogram of Oriented Gradient(HOG)](https://github.com/vamc-stash/image-retrieval/blob/master/src/hog/hog.py) </br>
    In this descriptor, feature vector is extracted by segementing image into smaller cells and for each cell, we accumulate a local histogram of gradient in several orientations over all the pixels in the cell. 
-* `deep methods`
-   - [VGGNet(VGG16)](https://github.com/vamc-stash/image-retrieval/blob/master/src/vgg16/vgg16.py) </br>
-   VGG16 is a convolutional neural network model pre-trained on ImageNet dataset. 
-   
+</br>
 
 ## Part 2. Indexing dataset
 
@@ -33,7 +28,6 @@ Now apply image descriptor to each image in your dataset, extract features from 
 **color-based** - `run python3 /color/index.py --index index.csv` </br>
 **texture-based** - `run python3 /gabor/index.py --index index.csv` </br>
 **shape-based** - `run python3 /hog/index.py --index index.csv` </br>
-**vgg16** - `run python3 /vgg16/index.py --index index.h5` </br>
 
 
 ## Part 3. Define Similarity metric
@@ -45,21 +39,13 @@ I used chi-squared distance for color histogram and HOG methods, Least square er
 
 This part performs actual search of user query image by (1) extracting features from this query image and then (2) apply your similarity function to compare the query features to the features already indexed. From there, system returns the most relevant results according to your similarity function.</br>
 
-### Query 1 - pyramids </br>
-<img src="https://github.com/vamc-stash/image-retrieval/blob/master/query_images/egypt.jpg" alt="pyramids" width="150" height="150"> </br>
 ### Results (Top 5 of each method)
 **color** <br>
-`run python3 search.py --query ../query_images/tajmahal.jpg --c color`
-<img src="https://github.com/vamc-stash/image-retrieval/blob/master/results/q1_color_result.png" alt="color-result" > </br>
+`run python3 search.py --query ../query_images/exemple.jpg --c color`
 **gabor** <br>
-`run python3 search.py --query ../query_images/tajmahal.jpg --c gabor`
-<img src="https://github.com/vamc-stash/image-retrieval/blob/master/results/q1_gabor_result.png" alt="color-result" > </br>
+`run python3 search.py --query ../query_images/exemple.jpg --c gabor`
 **hog** <br>
 `run python3 search.py --query ../query_images/tajmahal.jpg --c hog`
-<img src="https://github.com/vamc-stash/image-retrieval/blob/master/results/q1_hog_result.png" alt="color-result" > </br>
-**vgg16** <br>
-`run python3 search.py --query ../query_images/tajmahal.jpg --c vgg16`
-<img src="https://github.com/vamc-stash/image-retrieval/blob/master/results/q1_vgg16_result.png" alt="color-result" > </br>
 
 
 
